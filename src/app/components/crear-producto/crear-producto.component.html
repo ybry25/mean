@@ -1,0 +1,114 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">{{ mensage }} PRODUCTO</span>
+          <form
+            [formGroup]="productoForm"
+            (ngSubmit)="guardarProducto()"
+            class="mt-3"
+          >
+            <div class="mb-3">
+              <input
+                formControlName="producto"
+                type="text"
+                class="form-control"
+                placeholder="Producto"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  !this.productoForm.get('producto')?.valid &&
+                  this.productoForm.get('producto')?.touched
+                "
+              >
+                <span
+                  >El nombre del producto <strong>es obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                formControlName="categoria"
+                type="text"
+                class="form-control"
+                placeholder="Categoría"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  !this.productoForm.get('categoria')?.valid &&
+                  this.productoForm.get('categoria')?.touched
+                "
+              >
+                <span
+                  >La categira del producto
+                  <strong>es obligatoria</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <select formControlName="ubicacion" class="form-select">
+                <option disabled selected value="">
+                  Open this select menu
+                </option>
+                <option value="ARG">Argentina</option>
+                <option value="BOL">Bolivia</option>
+                <option value="COL">Colombia</option>
+              </select>
+              <div
+                class="text-danger"
+                *ngIf="
+                  !this.productoForm.get('ubicacion')?.valid &&
+                  this.productoForm.get('ubicacion')?.value == '' &&
+                  this.productoForm.get('ubicacion')?.touched
+                "
+              >
+                <span
+                  >La ubicacion del producto
+                  <strong>es obligatoria</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                formControlName="precio"
+                type="number"
+                class="form-control"
+                placeholder="Precio"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  !this.productoForm.get('precio')?.valid &&
+                  this.productoForm.get('precio')?.touched
+                "
+              >
+                <span
+                  >El precio del producto <strong>es obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="mb-3">
+              <button routerLink="/" class="btn btn-secondary float-start">
+                VOLVER
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success float-end"
+                [disabled]="
+                  !this.productoForm.valid ||
+                  this.productoForm.get('ubicacion')?.value == '' ||
+                  this.productoForm.get('precio')?.value < 1
+                "
+              >
+                ACEPTAR
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

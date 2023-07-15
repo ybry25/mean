@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="titulo">LISTADO DE PRODUCTOS</span>
+          <button
+            routerLink="/crear-producto"
+            class="btn btn-primary float-end"
+          >
+            NUEVO
+          </button>
+          <table
+            *ngIf="listaProductos.length > 0 && !espera"
+            class="table table-striped mt-2"
+          >
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Ubicación</th>
+                <th scope="col">Precio</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listaProductos">
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.categoria }}</td>
+                <td>{{ item.ubicacion }}</td>
+                <th>{{ item.precio }}</th>
+                <td>
+                  <i
+                    class="fa-solid fa-pen-to-square text-success"
+                    routerLink="editar-producto/{{ item._id }}"
+                  ></i>
+                  <i
+                    class="fa-solid fa-trash text-danger"
+                    (click)="eliminarProducto(item._id)"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 *ngIf="listaProductos.length == 0 && !espera" class="mt-3">
+            No hay informacion
+          </h5>
+        </div>
+        <div *ngIf="espera" class="d-flex justify-content-center mb-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
